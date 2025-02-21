@@ -16,9 +16,12 @@
   "dependencies": {
     "@tavily/core": "^0.0.2",
     "@types/cors": "^2.8.17",
+    "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.10.1",
     "openai": "^4.26.0"
   },
   "devDependencies": {
