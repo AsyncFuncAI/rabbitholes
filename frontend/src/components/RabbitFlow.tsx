@@ -83,7 +83,21 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
     };
   });
 
-  return { nodes: newNodes, edges };
+  const newEdges = edges.map((edge) => ({
+    ...edge,
+    type: 'default',
+    animated: true,
+    style: {
+      stroke: 'rgba(248, 248, 248, 0.8)',
+      strokeWidth: 1.5,
+    },
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      color: 'rgba(248, 248, 248, 0.8)',
+    },
+  }));
+
+  return { nodes: newNodes, edges: newEdges };
 };
 
 const RabbitFlow: React.FC<RabbitFlowProps> = ({
@@ -170,7 +184,7 @@ const RabbitFlow: React.FC<RabbitFlowProps> = ({
               id: `edge-${questionId}`,
               source: parentId,
               target: questionId,
-              type: ConnectionLineType.SmoothStep,
+              type: 'default',
               animated: true,
               style: {
                 stroke: 'rgba(248, 248, 248, 0.8)',
@@ -190,7 +204,7 @@ const RabbitFlow: React.FC<RabbitFlowProps> = ({
         id: `history-edge-${index}`,
         source: `history-${index}`,
         target: `history-${index + 1}`,
-        type: ConnectionLineType.SmoothStep,
+        type: 'default',
         animated: true,
         style: {
           stroke: 'rgba(248, 248, 248, 0.8)',
@@ -219,8 +233,16 @@ const RabbitFlow: React.FC<RabbitFlowProps> = ({
         addEdge(
           {
             ...params,
-            type: ConnectionLineType.SmoothStep,
+            type: 'default',
             animated: true,
+            style: {
+              stroke: 'rgba(248, 248, 248, 0.8)',
+              strokeWidth: 1.5,
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              color: 'rgba(248, 248, 248, 0.8)',
+            },
           },
           eds
         )
@@ -247,8 +269,9 @@ const RabbitFlow: React.FC<RabbitFlowProps> = ({
         onConnect={onConnect}
         onNodeClick={handleNodeClick}
         nodeTypes={nodeTypes}
-        connectionLineType={ConnectionLineType.SmoothStep}
+        connectionLineType={ConnectionLineType.Bezier}
         defaultEdgeOptions={{
+          type: 'default',
           animated: true,
           style: { stroke: 'rgba(255, 255, 255, 0.3)' },
         }}
